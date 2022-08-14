@@ -10,7 +10,7 @@ export function GifExpertApp() {
   return (
     <>
       <h1>GifExpertApp</h1>
-      <AddCategory />
+      <AddCategory setCategories={setCategories} />
       <button onClick={onAddCategory} type="button">Agregar</button>
       <ol>
         { categories.map((category) => (
