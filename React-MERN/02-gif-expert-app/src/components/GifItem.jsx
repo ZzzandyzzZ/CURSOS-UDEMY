@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 export const GifItem = ({ title, url }) => {
-  console.log(title);
+  console.log();
   return (
     <div>
       <img src={url} alt={title} />
