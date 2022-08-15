@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export function AddCategory({ setCategories }) {
-  const [inputValue, setInputValue] = useState('One Puch Man');
+export function AddCategory({ onNewCategory }) {
+  const [inputValue, setInputValue] = useState('');
 
   const onInputChange = ({ target }) => {
     setInputValue(target.value);
@@ -11,7 +11,9 @@ export function AddCategory({ setCategories }) {
   const onSubmit = (event) => {
     event.preventDefault();
     if (inputValue.trim().length <= 1) return;
-    setCategories((categorie) => [inputValue, ...categorie]);
+    // setCategories((categorie) => [inputValue, ...categorie]);
+    console.log(inputValue);
+    onNewCategory(inputValue.trim());
     setInputValue('');
   };
 
@@ -28,5 +30,5 @@ export function AddCategory({ setCategories }) {
 }
 
 AddCategory.propTypes = {
-  setCategories: PropTypes.func.isRequired,
+  onNewCategory: PropTypes.func.isRequired,
 };
