@@ -12,7 +12,6 @@ export function AddCategory({ onNewCategory }) {
     event.preventDefault();
     if (inputValue.trim().length <= 1) return;
     // setCategories((categorie) => [inputValue, ...categorie]);
-    console.log(inputValue);
     onNewCategory(inputValue.trim());
     setInputValue('');
   };
