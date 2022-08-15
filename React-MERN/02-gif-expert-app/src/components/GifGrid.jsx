@@ -1,17 +1,30 @@
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
 
 import { getGifs } from '../helpers/getGifs';
+import { GifItem } from './GifItem';
 
 export const GifGrid = ({ category }) => {
+  const [images, setImages] = useState([]);
+  const getImages = async () => {
+    const newImages = await getGifs(category);
+    setImages(newImages);
+  };
+
   useEffect(() => {
-    getGifs(category);
+    getImages();
   }, []);
 
   return (
     <>
-      <h3>{ category }</h3>
-      <p>Hola</p>
+      <h2>{ category }</h2>
+      <div className="card-grid">
+        {
+          images.map(({ title, id, url }) => (
+            <GifItem key={id} title={title} url={url} />
+          ))
+        }
+      </div>
     </>
   );
 };
