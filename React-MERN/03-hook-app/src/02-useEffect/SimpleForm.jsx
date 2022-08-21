@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useState } from 'react';
 
 export const SimpleForm = () => {
@@ -5,7 +6,9 @@ export const SimpleForm = () => {
     username: 'andy',
     email: 'andy@gmail.com',
   })
+
   const {username, email} = formState;
+
   const onInputChange = ({target}) => {
     const {name, value} = target;
     setFormState({
@@ -13,6 +16,7 @@ export const SimpleForm = () => {
       [name]:value,
     })
   }
+
 
   return (
     <>
