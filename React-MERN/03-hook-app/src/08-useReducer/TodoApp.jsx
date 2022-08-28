@@ -3,10 +3,10 @@ import { TodoAdd } from './TodoAdd';
 import { TodoList } from './TodoList';
 
 export const TodoApp = () => {
-  const {todos, handleNewTodo, handleRemoveTodo, handleToggleTodo} = useTodo();
+  const {todos,todosCount, pendingTodoCount, handleNewTodo, handleRemoveTodo, handleToggleTodo} = useTodo();
   return (
     <>
-      <h1>TodoApp: 10,<small>Pendientes: 2</small></h1>
+      <h1>TodoApp: { todosCount },<small>Pendientes: { pendingTodoCount }</small></h1>
       <hr />
       <div className="row">
         <div className="col-7">
