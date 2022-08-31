@@ -1,2 +1,4 @@
 export * from './DcPage';
-export * from './Marvel';
+export * from './MarvelPage';
+export * from './HeroePage';
+export * from './SearchPage';
