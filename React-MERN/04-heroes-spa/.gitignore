@@ -1,4 +1,4 @@
-src/assets/heroes/*
+assets/heroes/*
 # Logs
 logs
 *.log
