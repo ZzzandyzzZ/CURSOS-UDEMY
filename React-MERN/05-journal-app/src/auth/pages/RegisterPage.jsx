@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import { AuthLayout } from '../layout/AuthLayout'
-import { Button, Grid, TextField, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { Link as RouterLink} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { Button, Grid, TextField, Typography } from '@mui/material'
+import { AuthLayout } from '../layout/AuthLayout'
 import { useForm } from '../../hooks'
+import { startCreatingUserWithEmailPassword } from '../../store/auth/thunks'
 
 const formData = {
   email: 'andy@gmail.com',
@@ -18,17 +20,19 @@ const formValidations = {
 }
 
 export const RegisterPage = () => {
+  const dispatch = useDispatch();
   const [formSubmitted, setFormSubmitted] = useState(false)
   const {
     email, password, displayName,
     emailValid, passwordValid, displayNameValid,
-    onInputChange,
+    onInputChange, isFormValid,
   } = useForm(formData, formValidations);
 
   const onSubmit = (event) => {
     event.preventDefault();
     setFormSubmitted(true);
     if (!isFormValid) return;
+    dispatch(startCreatingUserWithEmailPassword({email, password, displayName}));
   }
 
   return (
