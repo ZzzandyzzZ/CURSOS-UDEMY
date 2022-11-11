@@ -1,7 +1,7 @@
 import { onAuthStateChanged } from 'firebase/auth'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { AuthRoutes } from '../auth/routes/AuthRoutes'
 import { FirebaseAuth } from '../firebase/config'
 import { JournalRoutes } from '../journal/routes/JournalRoutes'
@@ -24,8 +24,12 @@ export const AppRouter = () => {
   }
   return (
     <Routes>
-      <Route path='/auth/*' element={<AuthRoutes />}/>
-      <Route path='/*' element={<JournalRoutes />}/>
+      {
+        (status === 'authenticated')
+          ? <Route path='/*' element={<JournalRoutes />}/>
+          : <Route path='/auth/*' element={<AuthRoutes />}/>
+      }
+      <Route path='/*' element={<Navigate to='/auth/login' />} />
     </Routes>
   )
 }
