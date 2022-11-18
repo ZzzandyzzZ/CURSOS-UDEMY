@@ -6,18 +6,40 @@ export const journalSlice = createSlice({
     isSaving: true,
     messageSaved: '',
     notes: [],
-    active: {
-      id: 'ABC',
-      title: '',
-      date: 123,
-      imageUrls: [],
-    },
+    // active: {
+    //   id: 'ABC',
+    //   title: '',
+    //   date: 123,
+    //   imageUrls: [],
+    // },
   },
   reducers: {
-    a: (state) => {
-      code
+    addNewEmptyNote: (state) => {
+
     },
+    setActiveNote: (state, action) => {
+
+    },
+    setNotes: (state, action) => {
+
+    },
+    setSaving: (state, action) => {
+
+    },
+    updateNote: (state) => {
+
+    },
+    deleteNoteById: (state, action) => {
+
+    }
   },
 })
 
-export const { increment } = journalSlice.actions
+export const {
+  addNewEmptyNote,
+  setActiveNote,
+  setNotes,
+  setSaving,
+  updateNote,
+  deleteNoteById,
+} = journalSlice.actions
