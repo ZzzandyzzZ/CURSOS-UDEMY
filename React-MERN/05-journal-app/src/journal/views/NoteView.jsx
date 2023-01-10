@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { SaveOutlined } from '@mui/icons-material'
+import { SaveOutlined, UploadFileOutlined } from '@mui/icons-material'
 import { Button, Grid, IconButton, TextField, Typography } from '@mui/material'
 import Swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.css'
@@ -51,7 +51,10 @@ export const NoteView = () => {
         multiple
         onChange={onFileInputChange}
       />
-      <IconButton>
+      <IconButton
+        color='primary'
+        disabled={isSaving}
+      >
         <UploadFileOutlined />
       </IconButton>
       <Button
