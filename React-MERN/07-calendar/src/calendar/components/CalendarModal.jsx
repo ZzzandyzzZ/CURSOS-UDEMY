@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { addHours, differenceInSeconds } from 'date-fns';
+import { differenceInSeconds } from 'date-fns';
 import { es } from 'date-fns/locale';
 
 import DatePicker, { registerLocale } from 'react-datepicker';
