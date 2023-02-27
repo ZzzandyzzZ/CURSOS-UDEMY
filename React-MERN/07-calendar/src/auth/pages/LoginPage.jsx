@@ -17,7 +17,7 @@ const registerFormFields = {
 };
 
 export function LoginPage() {
-  const { startLogin, errorMsg } = useAuthStore();
+  const { startLogin, startRegister, errorMsg } = useAuthStore();
   const { loginEmail, loginPassword, onInputChange: onLoginInputChange } = useForm(loginFormFields);
   const {
     registerEmail,
@@ -30,9 +30,15 @@ export function LoginPage() {
     event.preventDefault();
     startLogin({ email: loginEmail, password: loginPassword });
   };
+
   const registerSubmit = (event) => {
     event.preventDefault();
+    if (registerPassword !== registerPassword2) {
+      return Swal.fire('', '', 'error');
+    }
+    return startRegister({ name: registerName, email: registerEmail, password: registerPassword });
   };
+
   useEffect(() => {
     if (errorMsg !== null) {
       Swal.fire('Error en la autenticacion', errorMsg, 'error');

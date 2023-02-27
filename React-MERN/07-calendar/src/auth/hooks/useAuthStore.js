@@ -21,6 +21,24 @@ export const useAuthStore = () => {
     }
   };
 
+  const startRegister = async ({
+    name, email, password,
+  }) => {
+    dispatch(onChecking());
+    try {
+      const { data: { uid, token } } = await calendarApi.post('/auth/new', {
+        name, email, password,
+      });
+      localStorage.setItem('token', token);
+      localStorage.setItem('token-init-date', new Date().getTime());
+      dispatch(onLogin(name, uid));
+    } catch (error) {
+      console.log(error);
+      dispatch(onLogout(error.response.data?.msg || 'Error al registrar'));
+      setTimeout(() => { dispatch(clearErrorMsg()); }, 4);
+    }
+  };
+
   return {
     // Props
     status,
@@ -28,5 +46,6 @@ export const useAuthStore = () => {
     errorMsg,
     // Methods
     startLogin,
+    startRegister,
   };
 };
