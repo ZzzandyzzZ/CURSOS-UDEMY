@@ -3,6 +3,7 @@ const { response } = require('express');
 const bcrypt = require('bcryptjs')
 
 const { User } = require('../models/User');
+const { generateJWT } = require('../helpers/jwt');
 
 const createUser = async (req, res = response) => {
   const { email, name, password } = req.body;
@@ -25,10 +26,12 @@ const createUser = async (req, res = response) => {
       msg: 'Comunicarse con el admin',
     });
   }
+  const token = await generateJWT(user.id, user.name);
   res.status(201).json({
     ok: true,
     uid: user.id,
     name: user.name,
+    token,
   })
 }
 
@@ -48,10 +51,12 @@ const loginUser = async (req, res = response) => {
       msg: 'Contraseña incorrecta'
     })
   }
+  const token = await generateJWT(user.id, user.name);
   res.json({
     ok: true,
     uid: user.id,
     name: user.name,
+    token,
   })
 }
 
