@@ -13,6 +13,7 @@ import { Navbar } from '../components/Navbar';
 import { useCalendarStore } from '../../hooks/useCalendarStore';
 import { useUiStore } from '../../hooks/useUiStore';
 import { FabAddNew } from '../components/FabAddNew';
+import { FabDelete } from '../components/FabDelete';
 
 export function CalendarPage() {
   const { openDateModal } = useUiStore();
@@ -65,6 +66,7 @@ export function CalendarPage() {
       />
       <CalendarModal />
       <FabAddNew />
+      <FabDelete />
     </>
   );
 }
