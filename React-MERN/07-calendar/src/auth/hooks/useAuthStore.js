@@ -33,9 +33,22 @@ export const useAuthStore = () => {
       localStorage.setItem('token-init-date', new Date().getTime());
       dispatch(onLogin(name, uid));
     } catch (error) {
-      console.log(error);
       dispatch(onLogout(error.response.data?.msg || 'Error al registrar'));
       setTimeout(() => { dispatch(clearErrorMsg()); }, 4);
+    }
+  };
+
+  const checkAuthToken = async () => {
+    const localToken = localStorage.getItem('token');
+    if (!localToken) return dispatch(onLogout());
+    try {
+      const { data: { token, name, uid } } = await calendarApi.get('/auth/renew');
+      localStorage.setItem('token', token);
+      localStorage.setItem('token-init-date', new Date().getTime());
+      dispatch(onLogin(name, uid));
+    } catch (error) {
+      localStorage.clear();
+      dispatch(onLogout());
     }
   };
 
@@ -47,5 +60,6 @@ export const useAuthStore = () => {
     // Methods
     startLogin,
     startRegister,
+    checkAuthToken,
   };
 };
