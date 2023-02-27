@@ -1,10 +1,10 @@
 const { response } = require('express');
 const jwt = require('jsonwebtoken');
-
 const { SECRET_JWT_SEED } = process.env
 
 const validateJWT = (req, res = response, next) => {
   const token = req.header('x-token');
+  let errorMsg = 'Token incorrecto';
   if (!token) {
     return res.status(401).json({
       ok: false,
@@ -16,10 +16,12 @@ const validateJWT = (req, res = response, next) => {
     req.uid = uid;
     req.name = name;
   } catch (error) {
-    console.log(error)
+    if (error instanceof jwt.TokenExpiredError) {
+      errorMsg = 'Token expirado'
+    }
     return res.status(401).json({
       ok: false,
-      msg: 'Token incorrecto'
+      msg: errorMsg,
     })
   }
   next();
