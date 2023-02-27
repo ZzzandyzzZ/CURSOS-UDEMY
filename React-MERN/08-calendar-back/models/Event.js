@@ -4,7 +4,7 @@ const { Schema, model } = require('mongoose');
 const EventSchema = Schema({
   title: {
     type: String,
-    require: true,
+    required: true,
   },
   notes: {
     type: String,
@@ -18,9 +18,10 @@ const EventSchema = Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
+    required: true,
   },
 });
 
 module.exports = {
-  Event: model('User', EventSchema),
+  Event: model('Event', EventSchema),
 }

@@ -1,4 +1,5 @@
-const { response } = require('express')
+const { response } = require('express');
+const { Event } = require('../models/Event');
 
 const getEvents = (req, res = response) => {
   res.json({
@@ -6,11 +7,12 @@ const getEvents = (req, res = response) => {
     msg: 'get events'
   });
 }
-const createEvent = (req, res = response) => {
-  console.log(req.body)
+const createEvent = async (req, res = response) => {
+  const event = new Event(req.body);
+  const eventSaved = await event.save()
   res.json({
     ok: true,
-    msg: 'createEvent'
+    eventSaved,
   });
 }
 const updateEvent = (req, res = response) => {
