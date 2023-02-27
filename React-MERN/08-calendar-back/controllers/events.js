@@ -9,11 +9,20 @@ const getEvents = (req, res = response) => {
 }
 const createEvent = async (req, res = response) => {
   const event = new Event(req.body);
-  const eventSaved = await event.save()
-  res.json({
-    ok: true,
-    eventSaved,
-  });
+  event.user = req.uid;
+  try {
+    const eventSaved = await event.save()
+    res.json({
+      ok: true,
+      eventSaved,
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      ok: false,
+      msg: 'Hubo un error :(',
+    })
+  }
 }
 const updateEvent = (req, res = response) => {
   res.json({
