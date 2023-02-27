@@ -9,6 +9,7 @@ import { getMessagesES } from '../../helpers/getMessages';
 import { CalendarEvent } from '../components/CalendarEvent';
 import { useState } from 'react';
 import { CalendarModal } from '../components/CalendarModal';
+import { useUiStore } from '../../hooks/useUiStore';
 
 const events = [{
   title: 'Cumpleaños del jefe',
@@ -21,6 +22,7 @@ const events = [{
 }];
 
 export function CalendarPage() {
+  const { openDateModal } = useUiStore();
   const [lastView, setlastView] = useState(localStorage.getItem('lastView') || 'week');
 
   const eventStyleGetter = (event, start, end, isSelected) => {
@@ -36,7 +38,7 @@ export function CalendarPage() {
   };
 
   const onDoubleClick = (event) => {
-
+    openDateModal();
   };
 
   const onSelect = (event) => {

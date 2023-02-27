@@ -10,6 +10,7 @@ import Modal from 'react-modal';
 
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
+import { useUiStore } from '../../hooks/useUiStore';
 
 registerLocale('es', es);
 
@@ -27,7 +28,7 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 export function CalendarModal() {
-  const [isOpen, setIsOpen] = useState(true);
+  const { isDateModalOpen, closeDateModal } = useUiStore();
   const [formSubmited, setFormSubmited] = useState(false);
   const [formValues, setFormValues] = useState({
     title: 'Andy',
@@ -35,27 +36,28 @@ export function CalendarModal() {
     start: new Date(),
     end: addHours(new Date(), 2),
   });
+
   const titleClass = useMemo(() => {
     if (!formSubmited) return '';
     return (formValues.title.length > 0)
       ? 'is-valid'
       : 'is-invalid';
   }, [formValues.title, formSubmited]);
+
   const onInputChanged = ({ target }) => {
     setFormValues({
       ...formValues,
       [target.name]: target.value,
     });
   };
+
   const onDateChanged = (event, changing) => {
     setFormValues({
       ...formValues,
       [changing]: event,
     });
   };
-  const onCloseModal = () => {
-    setIsOpen(false);
-  };
+
   const onSubmit = (event) => {
     event.preventDefault();
     setFormSubmited(true);
@@ -67,10 +69,11 @@ export function CalendarModal() {
     if (formValues.title.length <= 0) return;
     console.log(formValues);
   };
+
   return (
     <Modal
-      isOpen={isOpen}
-      onRequestClose={onCloseModal}
+      isOpen={isDateModalOpen}
+      onRequestClose={closeDateModal}
       style={customStyles}
       className="modal"
       overlayClassName="modal-fondo"
