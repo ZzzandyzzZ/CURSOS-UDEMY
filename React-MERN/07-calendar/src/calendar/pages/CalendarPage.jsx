@@ -12,6 +12,7 @@ import { localizer } from '../../helpers/calendarLocalizer';
 import { Navbar } from '../components/Navbar';
 import { useCalendarStore } from '../../hooks/useCalendarStore';
 import { useUiStore } from '../../hooks/useUiStore';
+import { FabAddNew } from '../components/FabAddNew';
 
 export function CalendarPage() {
   const { openDateModal } = useUiStore();
@@ -63,6 +64,7 @@ export function CalendarPage() {
         onView={onViewChanged}
       />
       <CalendarModal />
+      <FabAddNew />
     </>
   );
 }

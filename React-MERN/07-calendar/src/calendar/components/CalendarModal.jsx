@@ -32,12 +32,7 @@ export function CalendarModal() {
   const { isDateModalOpen, closeDateModal } = useUiStore();
   const [formSubmited, setFormSubmited] = useState(false);
   const { activeEvent } = useCalendarStore();
-  const [formValues, setFormValues] = useState({
-    title: 'Andy',
-    notes: 'Ñaca',
-    start: new Date(),
-    end: addHours(new Date(), 2),
-  });
+  const [formValues, setFormValues] = useState({});
 
   const titleClass = useMemo(() => {
     if (!formSubmited) return '';
