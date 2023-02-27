@@ -12,27 +12,30 @@ import { useCalendarStore } from '../../hooks/useCalendarStore';
 import { useUiStore } from '../../hooks/useUiStore';
 import { FabAddNew } from '../components/FabAddNew';
 import { FabDelete } from '../components/FabDelete';
-
-const eventStyleGetter = (event, start, end, isSelected) => {
-  const style = {
-    backgroundColor: '#347CF7',
-    borderRadius: '0px',
-    opacity: 0.8,
-    color: 'white',
-  };
-  return {
-    style,
-  };
-};
+import { useAuthStore } from '../../auth/hooks/useAuthStore';
 
 export function CalendarPage() {
   const { openDateModal } = useUiStore();
+  const { user } = useAuthStore();
   const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();
   const [lastView, setlastView] = useState(localStorage.getItem('lastView') || 'week');
 
   useEffect(() => {
     startLoadingEvents();
   }, []);
+
+  const eventStyleGetter = (event, start, end, isSelected) => {
+    const isMyEvent = (user.uid == event.user._id) || (user.uid === event.user.uid);
+    const style = {
+      backgroundColor: isMyEvent ? '#347CF7' : '#465660',
+      borderRadius: '0px',
+      opacity: 0.8,
+      color: 'white',
+    };
+    return {
+      style,
+    };
+  };
 
   const onDoubleClick = (event) => {
     openDateModal();

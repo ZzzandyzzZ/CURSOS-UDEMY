@@ -20,13 +20,12 @@ export const useCalendarStore = () => {
   };
 
   const startSavingEvent = async (calendarEvent) => {
-    // Back
     if (calendarEvent.id) {
-      disptach(onUpdateEvent({ ...calendarEvent }));
-    } else {
-      const { data } = await calendarApi.post('/events', calendarEvent);
-      disptach(onAddNewEvent({ ...calendarEvent, id: data.event.id, user }));
+      await calendarApi.put(`/events/${calendarEvent.id}`, calendarEvent);
+      disptach(onUpdateEvent({ ...calendarEvent, user }));
     }
+    const { data } = await calendarApi.post('/events', calendarEvent);
+    disptach(onAddNewEvent({ ...calendarEvent, id: data.event.id, user }));
   };
 
   const startLoadingEvents = async () => {
