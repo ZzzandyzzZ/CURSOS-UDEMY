@@ -53,10 +53,27 @@ const updateEvent = async (req, res = response) => {
   });
 }
 
-const deleteEvent = (req, res = response) => {
+const deleteEvent = async (req, res = response) => {
+  const eventId = req.params.id;
+  const { uid } = req;
+  const event = await Event.findById(eventId);
+  if (!event) {
+    return res.status(400).json({
+      ok: false,
+      msg: 'Evento no encontrado',
+    })
+  }
+  if (event.user.toString() !== uid) {
+    return res.status(401).json({
+      ok: false,
+      msg: 'No autorizado',
+    });
+  }
+
+  const deletedEvent = await Event.findByIdAndDelete(eventId);
   res.json({
     ok: true,
-    msg: 'deleteEvent'
+    deletedEvent,
   });
 }
 
