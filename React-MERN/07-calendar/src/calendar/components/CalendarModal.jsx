@@ -28,11 +28,17 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
+const initialFormValues = {
+  title: '',
+  notes: '',
+  start: null,
+  end: null,
+};
 export function CalendarModal() {
   const { isDateModalOpen, closeDateModal } = useUiStore();
   const [formSubmited, setFormSubmited] = useState(false);
   const { activeEvent, startSavingEvent } = useCalendarStore();
-  const [formValues, setFormValues] = useState({});
+  const [formValues, setFormValues] = useState(initialFormValues);
 
   const titleClass = useMemo(() => {
     if (!formSubmited) return '';
