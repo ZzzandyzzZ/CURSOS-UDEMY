@@ -10,9 +10,9 @@ const init = () => {
     user,
   }
 }
-export const AuthProvider = ({children}) => {
+export const AuthProvider = ({ children }) => {
   const [authState, dispatch] = useReducer(authReducer, {}, init);
-  const login = (name='') => {
+  const login = (name = '') => {
     const user = {
       id: 'ABC',
       name,
@@ -41,7 +41,7 @@ export const AuthProvider = ({children}) => {
         logout,
       }}
     >
-      { children }
+      {children}
     </AuthContext.Provider>
   )
 }
