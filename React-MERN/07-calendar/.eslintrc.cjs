@@ -19,6 +19,7 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     'import/prefer-default-export': 'off',
+    'no-param-reassign': ['error', { props: false }],
     'jsx-a11y/label-has-associated-control': [2, {
       labelComponents: ['CustomInputLabel'],
       labelAttributes: ['label'],
