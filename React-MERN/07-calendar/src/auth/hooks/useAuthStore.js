@@ -3,6 +3,7 @@ import { calendarApi } from '../../api/calendarApi';
 import {
   onChecking, onLogin, onLogout, clearErrorMsg,
 } from '../../store/auth/authSlice';
+import { onLogoutCalendar } from '../../store/calendar/calendarSlice';
 
 export const useAuthStore = () => {
   const { status, user, errorMsg } = useSelector((state) => state.auth);
@@ -55,6 +56,7 @@ export const useAuthStore = () => {
   const startLogout = () => {
     localStorage.clear();
     dispatch(onLogout());
+    dispatch(onLogoutCalendar());
   };
 
   return {
