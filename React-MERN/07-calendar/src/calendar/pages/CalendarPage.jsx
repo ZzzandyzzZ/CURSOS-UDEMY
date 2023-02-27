@@ -1,9 +1,10 @@
-import { Navbar } from '../components/Navbar'
+import { Navbar } from '../components/Navbar';
 
-export const CalendarPage = () => {
+export function CalendarPage() {
   return (
     <>
       <Navbar />
+      <div />
     </>
-  )
+  );
 }

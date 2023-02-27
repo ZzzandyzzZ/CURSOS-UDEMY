@@ -1,6 +1,6 @@
 import './LoginPage.css';
 
-export const LoginPage = () => {
+export function LoginPage() {
   return (
     <div className="container login-container">
       <div className="row">
@@ -68,11 +68,12 @@ export const LoginPage = () => {
               <input
                 type="submit"
                 className="btnSubmit"
-                value="Crear cuenta" />
+                value="Crear cuenta"
+              />
             </div>
           </form>
         </div>
       </div>
     </div>
-  )
+  );
 }
