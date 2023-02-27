@@ -26,12 +26,33 @@ const createEvent = async (req, res = response) => {
     })
   }
 }
-const updateEvent = (req, res = response) => {
+const updateEvent = async (req, res = response) => {
+  const eventId = req.params.id;
+  const { uid } = req;
+  const event = await Event.findById(eventId);
+  if (!event) {
+    return res.status(400).json({
+      ok: false,
+      msg: 'Evento no encontrado',
+    })
+  }
+  if (event.user.toString() !== uid) {
+    return res.status(401).json({
+      ok: false,
+      msg: 'No autorizado',
+    });
+  }
+  const newEvent = {
+    ...req.body,
+    user: uid,
+  }
+  const updatedEvent = await Event.findByIdAndUpdate(eventId, newEvent, {new:true});
   res.json({
     ok: true,
-    msg: 'updateEvent'
+    updatedEvent,
   });
 }
+
 const deleteEvent = (req, res = response) => {
   res.json({
     ok: true,
