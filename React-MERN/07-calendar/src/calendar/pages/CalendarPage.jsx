@@ -8,6 +8,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { getMessagesES } from '../../helpers/getMessages';
 import { CalendarEvent } from '../components/CalendarEvent';
 import { useState } from 'react';
+import { CalendarModal } from '../components/CalendarModal';
 
 const events = [{
   title: 'Cumpleaños del jefe',
@@ -66,6 +67,7 @@ export function CalendarPage() {
         onSelectEvent={onSelect}
         onView={onViewChanged}
       />
+      <CalendarModal />
     </>
   );
 }
