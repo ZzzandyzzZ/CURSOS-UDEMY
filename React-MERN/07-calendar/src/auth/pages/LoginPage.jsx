@@ -40,7 +40,7 @@ export function LoginPage() {
   };
 
   useEffect(() => {
-    if (errorMsg !== null) {
+    if (errorMsg !== null && errorMsg !== undefined) {
       Swal.fire('Error en la autenticacion', errorMsg, 'error');
     }
   }, [errorMsg]);
