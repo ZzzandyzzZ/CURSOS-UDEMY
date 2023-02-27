@@ -15,7 +15,8 @@ export const useCalendarStore = () => {
     disptach(onSetActiveEvent(calendarEvent));
   };
 
-  const startDeletingEvent = () => {
+  const startDeletingEvent = async () => {
+    await calendarApi.delete(`/events/${activeEvent.id}`);
     disptach(onDeleteEvent());
   };
 
