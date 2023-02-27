@@ -16,6 +16,7 @@ app.use(express.static('public'));
 app.use(express.json())
 
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/events', require('./routes/events'));
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`)
